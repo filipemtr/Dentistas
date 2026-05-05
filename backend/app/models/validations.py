@@ -18,3 +18,13 @@ class Usuarios(BaseModel):
     role: str
     telefone: str
     criado_em: datetime
+
+class Consultas(BaseModel):
+    id: int
+    paciente_id: UUID
+    procedimento_id: int
+    plano_id: int
+    data: datetime
+    data_criada: datetime
+    e_ativo: bool
+    valor: float
