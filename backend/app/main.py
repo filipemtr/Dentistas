@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, APIRouter
 from auth.dependencies import is_admin
 from routes.admin import consultas, pacientes, pedidos, planos, procedimentos, usuarios
-from routes.public import home
+from routes.public import home, auth
 
 app = FastAPI(title="dentistas_backend")
 
@@ -23,6 +23,7 @@ admin_router.include_router(usuarios.router)
 
 app.include_router(admin_router)
 app.include_router(home.router)
+app.include_router(auth.router)
 
 
 
