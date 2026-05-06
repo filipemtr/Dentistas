@@ -34,3 +34,8 @@ class Pacientes(BaseModel):
     cpf: str
     nome: str
     telefone: str
+
+class Procedimentos(BaseModel):
+    id: int
+    nome: str
+    custo: float
