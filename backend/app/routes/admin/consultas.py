@@ -1,10 +1,14 @@
 from fastapi import APIRouter, Depends
 from fastapi.encoders import jsonable_encoder
-from app.models.validations import Consultas
+from models.validations import Consultas
 from auth.dependencies import is_admin
-from app.database import supabase    
+from database import supabase    
 
 router = APIRouter(prefix="/consultas", tags=["consultas"])
+
+@router.get("/")
+def home_consultas():
+    return {"msg": "consultas"}
 
 @router.get("/view")
 def get_appointments(user=Depends(is_admin)):

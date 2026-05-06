@@ -1,9 +1,13 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
-from app.models.validations import Pedidos
-from app.database import supabase    
+from models.validations import Pedidos
+from database import supabase    
 
 router = APIRouter(prefix="/pedidos", tags=["pedidos"])
+
+@router.get("/")
+def home_pedidos():
+    return {"msg": "pedidos"}
 
 @router.get("/view")
 def get_order():

@@ -1,9 +1,13 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
-from app.database import supabase
-from app.models.validations import Usuarios
+from database import supabase
+from models.validations import Usuarios
 
 router = APIRouter(prefix="/usuarios", tags=["usuarios"])
+
+@router.get("/")
+def home_usuarios():
+    return {"msg": "usuarios"}
 
 @router.get("/view")
 def get_users():

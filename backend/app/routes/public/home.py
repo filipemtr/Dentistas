@@ -6,10 +6,10 @@ router = APIRouter(prefix="/home")
 def home():
     return {"msg": "página principal"}
 
-@router.post("/register")
+@router.get("/register")
 def register():
     return {"msg": "criar conta"}
 
-@router.post("/login")
+@router.get("/login")
 def login():
     return {"token": "fake-jwt"}
