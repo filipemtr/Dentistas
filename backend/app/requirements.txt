@@ -9,6 +9,7 @@ charset-normalizer==3.4.7
 click==8.3.3
 cryptography==48.0.0
 deprecation==2.1.0
+ecdsa==0.19.2
 fastapi==0.136.1
 fsspec==2026.4.0
 h11==0.16.0
@@ -25,6 +26,7 @@ multidict==6.7.1
 packaging==26.2
 postgrest==2.29.0
 propcache==0.4.1
+pyasn1==0.6.3
 pycparser==3.0
 pydantic==2.13.3
 pydantic_core==2.46.3
@@ -35,9 +37,11 @@ pyparsing==3.3.2
 pyroaring==1.1.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
+python-jose==3.5.0
 realtime==2.29.0
 requests==2.33.1
 rich==14.3.4
+rsa==4.9.1
 six==1.17.0
 starlette==1.0.0
 storage3==2.29.0
