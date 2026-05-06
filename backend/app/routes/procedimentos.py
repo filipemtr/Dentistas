@@ -5,13 +5,13 @@ from app.database import supabase
 
 router = APIRouter(prefix="/procedimentos", tags=["procedimentos"])
 
-@router.get("/")
+@router.get("/view")
 def get_procedure():
     response = supabase.table("procedimentos").select("*").execute()
 
     return response.data
 
-@router.post("/")
+@router.post("/create")
 def create_procedure(order: Procedimentos):
     data = jsonable_encoder(order)
 

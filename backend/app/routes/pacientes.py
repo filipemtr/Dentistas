@@ -5,13 +5,13 @@ from app.database import supabase
 
 router = APIRouter(prefix="/pacientes", tags=["pacientes"])
 
-@router.get("/")
+@router.get("/view")
 def get_pacients():
     response = supabase.table("pacientes").select("*").execute()
 
     return response.data
 
-@router.post("/")
+@router.post("/create")
 def create_pacient(order: Pacientes):
     data = jsonable_encoder(order)
 

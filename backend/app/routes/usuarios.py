@@ -5,13 +5,13 @@ from app.models.validations import Usuarios
 
 router = APIRouter(prefix="/usuarios", tags=["usuarios"])
 
-@router.get("/")
+@router.get("/view")
 def get_users():
     response = supabase.table("usuarios").select("*").execute()
 
     return response.data
 
-@router.post("/")
+@router.post("/create")
 def create_user(user: Usuarios):
     data = jsonable_encoder(user)
     
