@@ -8,6 +8,6 @@ def get_current_user():
     return user
 
 def is_admin(user = Depends(get_current_user)):
-    if user != "admin":
+    if user["role"] != "admin":
         raise HTTPException(403, detail="Você não tem permissão suficiente.")
     return user
