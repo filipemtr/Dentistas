@@ -28,3 +28,9 @@ class Consultas(BaseModel):
     data_criada: datetime
     e_ativo: bool
     valor: float
+
+class Pacientes(BaseModel):
+    id: UUID
+    cpf: str
+    nome: str
+    telefone: str
