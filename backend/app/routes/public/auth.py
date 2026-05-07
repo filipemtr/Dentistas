@@ -11,18 +11,16 @@ user_tabel = supabase.table("usuarios").select("*").execute()
 
 @router.post("/login")
 def login(email: str, pwd: str):
-    response = login_validation
+    response = login_validation(email, pwd)
 
     return response
     
 
 @router.post("/register")
-def register(data: Register):
-
-    response = register_validation(data)
-
+def register(nome: str, email: str, pwd: str, telefone: str, cpf: str):
+    response = register_validation(nome, email, pwd, telefone, cpf)
     supabase.table("usuarios").insert(response).execute()
-    
-    return {"msg": "Sucesso!"}
+
+    return {"msg": "Conta criada com sucesso!"}
     
         

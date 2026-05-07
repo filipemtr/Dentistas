@@ -6,6 +6,7 @@ from database import supabase
 from config import allowed_email
 
 user_tabel = supabase.table("usuarios").select("*").execute()
+symbols = "/,.;~]´[=-'#$%¨&*(){}_"
 
 def login_validation(email: str, pwd: str):
     response = (
@@ -32,15 +33,54 @@ def login_validation(email: str, pwd: str):
         "role": str(user["role"])
     })
     
-    return {
+    response_body = {
         "acess_token": token,
         "token_type": "bearer"
     }
 
-def register_validation(obj: Register):
+    return response_body
+
+def register_validation(nome: str, email: str, pwd: str, tel: str, cpf: str):
+    for symbol in symbols:
+        if symbol in nome:
+            raise HTTPException(400, "Nome inválido!")
+    if "@" not in email or "." not in email:
+        raise HTTPException(400, "Email inválido!")
+    if len(pwd) < 8:
+        raise HTTPException(400, "Senha precisa ter mais de 8 caracteres.")
+    if len(cpf) != 11:
+        cpf = cpf.replace(".", "").replace("-", "").replace(" ", "")
+        if len(cpf) != 11:
+            raise HTTPException(400, "CPF Inválido!")
+    
+    validation = (
+        supabase
+        .table("usuarios")
+        .select("*")
+        .eq("email", email)
+        .execute()
+    )
+
+    if validation.data:
+        raise HTTPException(400, "Email já  já existente!")
+    
+    validation = (
+        supabase
+        .table("usuarios")
+        .select("*")
+        .eq("cpf", cpf)
+        .execute()
+    )
+
+    if validation.data:
+        raise HTTPException(400, "CPF já existente!")
+
     new_user = {
-        "email": obj.email,
-        "senha": hash_password(obj.senha),
+        "nome": nome,
+        "email": email,
+        "senha": hash_password(pwd),
+        "telefone": tel,
+        "cpf": cpf,
         "role": "paciente" 
     }
 

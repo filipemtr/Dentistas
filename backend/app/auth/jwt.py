@@ -15,13 +15,13 @@ def verify_password(pwd: str, hashed:str):
 
 def create_token(data: dict):
     diference_time = os.getenv("ACESS_TOKEN_EXPIRE_MINUTES")
-    validation_time = datetime.now(timezone.utc) + timedelta(minutes=diference_time)
+    validation_time = datetime.now(timezone.utc) + timedelta(minutes=int(diference_time))
 
     KEY = os.getenv("SECRET_KEY")
     ALGORITHM = os.getenv("ALGORITHM")
 
     encode_data = data.copy()
-    encode_data = encode_data.update({"exp": validation_time})
+    encode_data["exp"] = validation_time
 
     return jwt.encode(encode_data, KEY, ALGORITHM)
 
