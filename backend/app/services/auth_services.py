@@ -1,6 +1,7 @@
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 from auth.jwt import verify_password, create_token, hash_password
+from models.validations import Register
 from database import supabase
 from config import allowed_email
 
@@ -36,20 +37,12 @@ def login_validation(email: str, pwd: str):
         "token_type": "bearer"
     }
 
-def register_validation(email:str, pwd: str):
-    for item in allowed_email:
-        if item not in email:
-            raise HTTPException(400, "Email inválido!")
-
-    for user in user_tabel:
-        if user == email:
-            raise HTTPException(400, "Este email já é atrelado a uma conta!")
-        
+def register_validation(obj: Register):
     new_user = {
-        "email": email,
-        "senha": hash_password(pwd),
+        "email": obj.email,
+        "senha": hash_password(obj.senha),
         "role": "paciente" 
     }
 
-    return supabase.table("usuarios").insert(new_user)
+    return new_user
         

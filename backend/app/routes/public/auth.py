@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from database import supabase
 from fastapi import HTTPException
+from models.validations import Register
 from auth.jwt import hash_password, verify_password, create_token
 from services.auth_services import login_validation, register_validation
 
@@ -16,9 +17,12 @@ def login(email: str, pwd: str):
     
 
 @router.post("/register")
-def register(email: str, pwd: str):
-    response = register_validation(email, pwd)
+def register(data: Register):
 
-    return response.execute()
+    response = register_validation(data)
+
+    supabase.table("usuarios").insert(response).execute()
+    
+    return {"msg": "Sucesso!"}
     
         

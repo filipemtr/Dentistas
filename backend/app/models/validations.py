@@ -39,3 +39,7 @@ class Procedimentos(BaseModel):
     id: int
     nome: str
     custo: float
+
+class Register(BaseModel):
+    email: str
+    senha: str
