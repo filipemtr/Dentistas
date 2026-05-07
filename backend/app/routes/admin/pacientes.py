@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
 from models.validations import Pacientes
+from services.pacientes_service import create_person
 from database import supabase    
 
 router = APIRouter(prefix="/pacientes", tags=["pacientes"])
@@ -18,8 +19,6 @@ def get_pacients():
 
 @router.post("/create")
 def create_pacient(order: Pacientes):
-    data = jsonable_encoder(order)
+    data = create_person(order)
 
-    response = supabase.table("pacientes").insert(data).execute()
-
-    return response.data
+    return data
