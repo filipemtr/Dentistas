@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from fastapi.encoders import jsonable_encoder
 from models.validations import Consultas
 from auth.dependencies import is_admin
+from services.consulta_service import create_appoint
 from database import supabase    
 
 router = APIRouter(prefix="/consultas", tags=["consultas"])
@@ -18,8 +19,4 @@ def get_appointments(user=Depends(is_admin)):
 
 @router.post("/create")
 def create_appointment(order: Consultas):
-    data = jsonable_encoder(order)
-
-    response = supabase.table("consultas").insert(data).execute()
-
-    return response.data
+    return create_appoint(order)
