@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Depends, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
-from auth.dependencies import is_admin
-from routes.admin import consultas, pacientes, pedidos, planos, procedimentos, usuarios
-from routes.public import home, auth
+from app.auth.dependencies import is_admin
+from app.routes.admin import consultas, pacientes, pedidos, planos, procedimentos, usuarios
+from app.routes.public import home, auth
 
 app = FastAPI(title="dentistas_backend")
 
