@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends
-from fastapi.encoders import jsonable_encoder
-from models.validations import Consultas
-from auth.dependencies import is_admin
-from services.consulta_service import create_appoint
-from database import supabase    
+from app.models.validations import Consultas
+from app.auth.dependencies import is_admin
+from app.services.consulta_service import create_appoint
+from app.database import supabase    
 
 router = APIRouter(prefix="/consultas", tags=["consultas"])
 

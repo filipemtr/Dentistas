@@ -1,9 +1,8 @@
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
-from auth.jwt import verify_password, create_token, hash_password
-from models.validations import Register
-from database import supabase
-from config import allowed_email
+from app.auth.jwt import verify_password, create_token, hash_password
+from app.models.validations import Register
+from app.database import supabase
 
 user_tabel = supabase.table("usuarios").select("*").execute()
 symbols = "/,.;~]´[=-'#$%¨&*(){}_"

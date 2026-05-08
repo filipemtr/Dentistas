@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
-from database import supabase
+from app.database import supabase
 
 def create_person(data:dict):
     

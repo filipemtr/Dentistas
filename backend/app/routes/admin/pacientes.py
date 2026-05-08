@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
-from models.validations import Pacientes
-from services.pacientes_service import create_person
-from database import supabase    
+from app.models.validations import Pacientes
+from app.services.pacientes_service import create_person
+from app.database import supabase    
 
 router = APIRouter(prefix="/pacientes", tags=["pacientes"])
 

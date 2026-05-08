@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from database import supabase
+from app.database import supabase
 
 def create_appoint(data: dict):
     

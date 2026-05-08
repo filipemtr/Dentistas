@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
-from models.validations import Procedimentos
-from database import supabase    
+from app.models.validations import Procedimentos
+from app.database import supabase    
 
 router = APIRouter(prefix="/procedimentos", tags=["procedimentos"])
 

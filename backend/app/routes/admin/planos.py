@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
-from database import supabase
-from models.validations import Planos
+from app.database import supabase
+from app.models.validations import Planos
 
 router = APIRouter(prefix="/planos", tags=["planos"])
 
