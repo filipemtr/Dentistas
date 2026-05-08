@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, APIRouter
+from fastapi.middleware.cors import CORSMiddleware
 from auth.dependencies import is_admin
 from routes.admin import consultas, pacientes, pedidos, planos, procedimentos, usuarios
 from routes.public import home, auth
@@ -24,6 +25,14 @@ admin_router.include_router(usuarios.router)
 app.include_router(admin_router)
 app.include_router(home.router)
 app.include_router(auth.router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 
