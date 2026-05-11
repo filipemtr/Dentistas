@@ -41,5 +41,8 @@ class Procedimentos(BaseModel):
     custo: float
 
 class Register(BaseModel):
+    nome: str
     email: str
-    senha: str
+    pwd: str
+    telefone: str
+    cpf: str

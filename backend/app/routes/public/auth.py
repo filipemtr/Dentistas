@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from app.database import supabase
 from app.services.auth_services import login_validation, register_validation
+from app.models.validations import Register
 
 router = APIRouter(prefix="/auth")
 user_tabel = supabase.table("usuarios").select("*").execute()
@@ -14,8 +15,8 @@ def login(email: str, pwd: str):
     
 
 @router.post("/register")
-def register(nome: str, email: str, pwd: str, telefone: str, cpf: str):
-    response = register_validation(nome, email, pwd, telefone, cpf)
+def register(register: Register):
+    response = register_validation(register)
     supabase.table("usuarios").insert(response).execute()
 
     return {"msg": "Conta criada com sucesso!"}

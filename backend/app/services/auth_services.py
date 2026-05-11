@@ -39,24 +39,24 @@ def login_validation(email: str, pwd: str):
 
     return response_body
 
-def register_validation(nome: str, email: str, pwd: str, tel: str, cpf: str):
+def register_validation(instance: Register):
     for symbol in symbols:
-        if symbol in nome:
+        if symbol in instance.nome:
             raise HTTPException(400, "Nome inválido!")
-    if "@" not in email or "." not in email:
+    if "@" not in instance.email or "." not in instance.email:
         raise HTTPException(400, "Email inválido!")
-    if len(pwd) < 8:
+    if len(instance.pwd) < 8:
         raise HTTPException(400, "Senha precisa ter mais de 8 caracteres.")
-    if len(cpf) != 11:
-        cpf = cpf.replace(".", "").replace("-", "").replace(" ", "")
-        if len(cpf) != 11:
+    if len(instance.cpf) != 11:
+        instance.cpf = instance.cpf.replace(".", "").replace("-", "").replace(" ", "")
+        if len(instance.cpf) != 11:
             raise HTTPException(400, "CPF Inválido!")
     
     validation = (
         supabase
         .table("usuarios")
         .select("*")
-        .eq("email", email)
+        .eq("email", instance.email)
         .execute()
     )
 
@@ -67,7 +67,7 @@ def register_validation(nome: str, email: str, pwd: str, tel: str, cpf: str):
         supabase
         .table("usuarios")
         .select("*")
-        .eq("cpf", cpf)
+        .eq("cpf", instance.cpf)
         .execute()
     )
 
@@ -75,11 +75,11 @@ def register_validation(nome: str, email: str, pwd: str, tel: str, cpf: str):
         raise HTTPException(400, "CPF já existente!")
 
     new_user = {
-        "nome": nome,
-        "email": email,
-        "senha": hash_password(pwd),
-        "telefone": tel,
-        "cpf": cpf,
+        "nome": instance.nome,
+        "email": instance.email,
+        "senha": hash_password(instance.pwd),
+        "telefone": instance.telefone,
+        "cpf": instance.cpf,
         "role": "paciente" 
     }
 
