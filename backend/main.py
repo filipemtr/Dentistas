@@ -27,7 +27,10 @@ app.include_router(home.router)
 app.include_router(auth.router)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://localhost:3000",
+        "https://dentistascaruaru.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
